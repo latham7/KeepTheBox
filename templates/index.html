@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>KeepTheBox</title>
+
+    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				 
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="navbar-toggler-icon"></span>
+				</button> <a class="navbar-brand" href="#">/pw KeepTheBox - Mineraze.net</a>
+				
+			</nav>
+			<div class="jumbotron">
+				<h2>
+					KeepTheBox Contribution Pricing Calculator
+				</h2>
+				<p>
+					Trying to keep track of how much to pay Vege can be tough, luckily, this website will solve that problem.
+				</p>
+				<p>
+					<a class="btn btn-primary btn-large" href="https://www.youtube.com/watch?v=LMaqwsvm11c">Pls Press Me</a>
+				</p>
+			</div>
+			<div class="row">
+				<div class="col-md-3 text-center">
+					<p>
+						<strong>Raw Gold Ore</strong>
+					</p> 
+					<form id="calc-goldore" action="/goldCalculate">
+						<div class="input-group">
+							<span class="input-group-addon"><i>Amount</i></span>
+							<input id="email" type="number" class="form-control" name="gold-amount">
+						  </div>
+						
+						<button type="submit" class="btn btn-success">Submit</button>
+					<p><strong>Answer:</strong>{{ goldValueOutput }} </p>
+					</form>
+				</div>
+				<div class="col-md-3 text-center">
+					<p>
+						<strong>Raw Iron Ore</strong>
+					</p> 
+					<form id="calc-ironore" action="/ironCalculate">
+						<div class="input-group">
+							<span class="input-group-addon"><i>Amount</i></span>
+							<input id="email" type="number" class="form-control" name="iron-amount">
+						  </div>
+						
+						<button type="submit" class="btn btn-success">Submit</button>
+					<p><strong>Answer:</strong>{{ ironValueOutput }} </p>
+					</form>
+				</div>
+				<div class="col-md-3 text-center">
+					<p>
+						<strong>Coal Ore</strong>
+					</p> 
+					<form id="calc-coalore" action="/coalCalculate">
+						<div class="input-group">
+							<span class="input-group-addon"><i>Amount</i></span>
+							<input id="email" type="number" class="form-control" name="coal-amount">
+						  </div>
+						
+						<button type="submit" class="btn btn-success">Submit</button>
+					<p><strong>Answer:</strong>{{ coalValueOutput }} </p>
+					</form>
+				</div>
+				<div class="col-md-3 text-center">
+					<p>
+						<strong>Raw Copper Ore</strong>
+					</p> 
+					<form id="calc-copperore" action="/copperCalculate">
+						<div class="input-group">
+							<span class="input-group-addon"><i>Amount</i></span>
+							<input id="email" type="text" class="form-control" name="copper-amount">
+						  </div>
+						
+						<button type="submit" class="btn btn-success">Submit</button>
+					<p><strong>Answer:</strong>{{ copperValueOutput }} </p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+    <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/scripts.js') }}"></script>
+  </body>
+</html>
