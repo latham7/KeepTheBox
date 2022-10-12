@@ -18,8 +18,9 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-					<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<nav class="navbar navbar-dark bg-dark">
 						<a class="navbar-brand" href="#">/pw KeepTheBox - v{{ version }}</a>
+						<span class="navbar-text">test</span>
 					</nav>
 					<div class="jumbotron">
 						<h2>
@@ -36,10 +37,12 @@
 					</div>
 					<form id="calculate" action="/calculate">
 						<div class="row">
-							<div class="col">
-								<p>
-									<strong>Raw Gold Ore</strong>
-								</p>
+							<div class="col text-center">
+								<h4 style="margin-bottom:0;">Raw Gold Ore</h3>
+								<div class="text-center">
+									<img src="{{ url_for('static',filename='img/gold.png') }}"
+										class="img-fluid mb-2" width="50%" height="50%">
+								</div>
 								<div class="input-group">
 									<span class="input-group-addon"><i>Shulkers</i></span>
 									<input id="email" type="number" class="form-control"
@@ -103,3 +106,5 @@
 		<script src="{{ url_for('static',filename='js/scripts.js') }}"></script>
 	</body>
 </html>
+
+<!-- THING NEEDED FOR /STATIC IMPORTS {{ url_for('static',filename='js/jquery.min.js') }} -->
