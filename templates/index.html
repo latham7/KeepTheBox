@@ -20,7 +20,6 @@
 				<div class="col-md-12">
 					<nav class="navbar navbar-dark bg-dark">
 						<a class="navbar-brand" href="#">/pw KeepTheBox - v{{ version }}</a>
-						<span class="navbar-text">test</span>
 					</nav>
 					<div class="jumbotron">
 						<h2>
@@ -35,7 +34,7 @@
 								href="https://www.youtube.com/watch?v=LMaqwsvm11c">Pls Press Me</a>
 						</p>
 					</div>
-					<form id="calculate" action="/calculate">
+					<form id="calculate" action="/calculate" method="post">
 						<div class="row">
 							<div class="col text-center">
 								<h4 style="margin-bottom:0;">Raw Gold Ore</h3>
@@ -88,8 +87,7 @@
 								<br>
 								<button type="submit" class="btn btn-success">Submit</button>
 								<br><br>
-								<input class="form-control text-center" type="text" placeholder="Answer:
-									{{ total }}" readonly>
+								<input class="form-control text-center" type="text" placeholder="Answer: {{ total }}" readonly>
 							</div>
 							<div class="col-sm">
 							</div>
