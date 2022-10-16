@@ -18,7 +18,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-					<nav class="navbar navbar-dark bg-dark">
+					<nav class="navbar navbar-light bg-light">
 						<a class="navbar-brand" href="#">/pw KeepTheBox - v{{ version }}</a>
 					</nav>
 					<div class="jumbotron">
@@ -116,6 +116,19 @@
 							</div>
 
 
+						</div>
+						<div class="row">
+							<div class="col-sm">
+								<label for="matSlider" class="form-label">Test Range</label>
+								<input type="range" class="form-range" min="0" max="100" value="65"id="matSlider" oninput="num.value = this.value">
+								<output id="num">65</output>
+							</div>
+							<div class="col-sm">
+								<!-- Filler Row -->
+							</div>
+							<div class="col-sm">
+								<!-- Filler Row -->
+							</div>
 						</div>
 					</form>
 
