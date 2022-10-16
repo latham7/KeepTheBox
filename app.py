@@ -1,12 +1,16 @@
 from flask import Flask, render_template, request
 from calculate import calculate
 
+
+
 import sqlite3
 
 
 # App Imports
 app = Flask(__name__, template_folder='web/templates', static_folder='web/static')
-version = "1.1.1"
+version = "1.2 Beta"
+
+debug_mode=False
 
 @app.route("/", methods=['GET', 'POST']) ## This index is weird. It will be a login page at some point
 def index():
@@ -16,6 +20,7 @@ def index():
 
 @app.route('/calculate', methods=['GET', 'POST'])
 def calculateRoute():
+
     goldValueDebug = int(request.form.get('gold-amount'))
     print(goldValueDebug)
     try:
