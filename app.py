@@ -1,7 +1,18 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
+from calculate import calculate
 
-from main import app
+import sqlite3
+
+
+# App Imports
+app = Flask(__name__, template_folder='web/templates', static_folder='web/static')
 version = "1.1.1"
+
+@app.route("/", methods=['GET', 'POST']) ## This index is weird. It will be a login page at some point
+def index():
+    return render_template("index.html", 
+    version=version)
+
 
 @app.route('/calculate', methods=['GET', 'POST'])
 def calculateRoute():
@@ -18,11 +29,5 @@ def calculateRoute():
         print("0001 - Could not convert string to int")
         return render_template("index.html", version=version, total="ERROR: Please enter a number.")
 
-def calculate(gold, iron, coal, copper):
-    goldOutput = gold*2275
-    ironOutput = iron*2275
-    coalOutput = coal*2275
-    copperOutput = copper*2275
-
-    total=goldOutput+ironOutput+coalOutput+copperOutput
-    return total
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5001)
