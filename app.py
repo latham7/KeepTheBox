@@ -8,7 +8,7 @@ import sqlite3
 
 # App Imports
 app = Flask(__name__, template_folder='web/templates', static_folder='web/static')
-version = "1.2 Beta"
+version = "1.2"
 
 debug_mode=False
 
