@@ -22,14 +22,18 @@ def index():
 def calculateRoute():
 
     goldValueDebug = int(request.form.get('gold-amount'))
+    global payoutInt
+    payoutInt = 65
+
     print(goldValueDebug)
     try:
         goldValue = int(request.form.get('gold-amount'))
         ironValue = int(request.form.get('iron-amount'))
         coalValue = int(request.form.get('coal-amount'))
         copperValue = int(request.form.get('copper-amount'))
-        total = calculate(goldValue, ironValue, coalValue, copperValue)
-        return render_template("index.html", version=version, total=total)
+        payoutInt = int(request.form.get('payoutPercent')) 
+        total = calculate(goldValue, ironValue, coalValue, copperValue, payoutInt)
+        return render_template("index.html", version=version, total=total, payoutPercent=payoutInt)
     except ValueError: #TypeError:
         print("0001 - Could not convert string to int")
         return render_template("index.html", version=version, total="ERROR: Please enter a number.")

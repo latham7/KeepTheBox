@@ -40,7 +40,7 @@
 								<h4 style="margin-bottom:0;">Raw Gold Ore</h3>
 								<div class="text-center">
 									<img src="{{ url_for('static',filename='img/gold.png') }}"
-										class="img-fluid mb-2" width="50%" height="50%">
+										class="img-fluid mb-2" style="width: 30%; height: 30%;">
 								</div>
 								<div class="input-group">
 									<span class="input-group-addon"><i>Shulkers</i></span>
@@ -53,7 +53,7 @@
 								<h4 style="margin-bottom:0;">Raw Iron Ore</h4>
 								<div class="text-center">
 									<img src="{{ url_for('static',filename='img/iron.webp') }}"
-										class="img-fluid mb-2" width="50%" height="50%">
+									class="img-fluid mb-2" style="width: 30%; height: 30%;">
 								</div>
 								<div class="input-group p-1">
 									<span class="input-group-addon"><i>Shulkers</i></span>
@@ -66,7 +66,7 @@
 								<h4 style="margin-bottom:0;">Coal Ore</h4>
 								<div class="text-center">
 									<img src="{{ url_for('static',filename='img/coal.webp') }}"
-										class="img-fluid mb-2" width="50%" height="50%">
+									class="img-fluid mb-2" style="width: 30%; height: 30%;">
 								</div>
 								<div class="input-group">
 									<span class="input-group-addon"><i>Shulkers</i></span>
@@ -79,7 +79,7 @@
 								<h4 style="margin-bottom:0;">Raw Copper Ore</h4>
 								<div class="text-center">
 									<img src="{{ url_for('static',filename='img/copper.webp') }}"
-										class="img-fluid mb-2" width="50%" height="50%">
+										class="img-fluid mb-2" style="width: 30%; height: 30%;">
 								</div>
 								<div class="input-group">
 									<span class="input-group-addon"><i>Shulkers</i></span>
@@ -119,8 +119,8 @@
 						</div>
 						<div class="row">
 							<div class="col-sm">
-								<label for="matSlider" class="form-label">Test Range</label>
-								<input type="range" class="form-range" min="0" max="100" value="65"id="matSlider" oninput="num.value = this.value">
+								<label for="matSlider" class="form-label">Payout Percentage</label>
+								<input type="range" name="payoutPercent" class="form-range" min="0" max="100" value="{{ payoutInt }}"id="matSlider" oninput="num.value = this.value">
 								<output id="num">65</output>
 							</div>
 							<div class="col-sm">
