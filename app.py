@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from calculate import calculate
 from database import createUser, initDb
+from auth import checkAuth, checkCookie
 import logging
 import sqlite3
 
@@ -9,8 +10,8 @@ import sqlite3
 
 app = Flask(__name__, template_folder='web/templates', static_folder='web/static')
 version = "1.2"
-
 debug_mode = False  # TODO Implement debugging mode
+initDb()
 
 
 ####### INDEX APP ROUTE #################
@@ -18,22 +19,31 @@ debug_mode = False  # TODO Implement debugging mode
 def index():
     # if has permission, return index.html
     # if not has permission, return login.html
-    return render_template("index.html",
-                           version=version)
+    createUser("test", "123")
+    return render_template("login.html")
 
 
 ####### LOGIN APP ROUTE #################
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    username = request.form.get('username')
-    password = request.form.get('password')
-    initDb()
-    # createUser(username, password)
-    try:
-        createUser(username, password)
-        return render_template('index.html')
-    except:
-        return render_template('login.html')
+
+    hasCookie = checkCookie(request.cookies.get('logonID'))
+    if hasCookie:
+        return render_template("index.html")
+
+    else:
+        username = request.form.get('username')
+        password = request.form.get('password')
+        authed = checkAuth(username, password)
+        if authed:
+            # insert cookie here
+            return redirect(url_for("calculateRoute", next=request.url))
+        else:
+            return render_template('login.html', error="Incorrect Username or Password")
+
+
+    # Get Data
+
 
     # return render_template('login.html')
 
@@ -54,6 +64,11 @@ def calculateRoute():
         logging.error("Error, lol, figure it out")
         print("0001 - Could not convert string to int")
         return render_template("index.html", version=version, total="Error")
+
+
+@app.route('/error', methods=['GET', 'POST'])
+def error():
+    return render_template("error.html")
 
 
 if __name__ == '__main__':
