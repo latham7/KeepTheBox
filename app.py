@@ -1,69 +1,69 @@
-from flask import Flask, render_template, request, redirect, url_for
+from django.shortcuts import render
+from flask import Flask, make_response, render_template, request, redirect, url_for
 from calculate import calculate
 from database import createUser, initDb
 from auth import checkAuth, checkCookie
 import logging
 import sqlite3
 
-# TODO Get SQLite3 working with user database
+
 
 
 app = Flask(__name__, template_folder='web/templates', static_folder='web/static')
 version = "1.2"
 debug_mode = False  # TODO Implement debugging mode
 initDb()
-
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 ####### INDEX APP ROUTE #################
-@app.route("/", methods=['GET', 'POST'])  ## This index is weird. It will be a login page at some point
+@app.route("/", methods=['GET', 'POST'])  
 def index():
-    # if has permission, return index.html
-    # if not has permission, return login.html
     createUser("test", "123")
-    return render_template("login.html")
+    hasCookie = checkCookie(request.cookies.get('logonID'))
+    if hasCookie:
+        return redirect('/calculate')
+    else: 
+        return render_template('login.html')
 
 
 ####### LOGIN APP ROUTE #################
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-
-    hasCookie = checkCookie(request.cookies.get('logonID'))
+    cookie = request.cookies.get('logonID')
+    hasCookie = checkCookie(cookie)
     if hasCookie:
         return render_template("index.html")
-
     else:
         username = request.form.get('username')
         password = request.form.get('password')
         authed = checkAuth(username, password)
         if authed:
-            # insert cookie here
-            return redirect(url_for("calculateRoute", next=request.url))
+            resp = make_response(redirect('/calculate'))
+            resp.set_cookie('logonID', username)
+            return resp
+            #return redirect(url_for("calculateRoute", next=request.url))
         else:
-            return render_template('login.html', error="Incorrect Username or Password")
-
-
-    # Get Data
-
-
-    # return render_template('login.html')
-
+            return render_template('loginError.html', error="Incorrect Username or Password")
 
 ####### CALCULATE APP ROUTE #################
 @app.route('/calculate', methods=['GET', 'POST'])
 def calculateRoute():
-    try:
-        payoutInt = 65
-        goldValue = int(request.form.get('gold-amount'))
-        ironValue = int(request.form.get('iron-amount'))
-        coalValue = int(request.form.get('coal-amount'))
-        copperValue = int(request.form.get('copper-amount'))
-        payoutInt = int(request.form.get('payoutPercent'))
-        total = calculate(goldValue, ironValue, coalValue, copperValue, payoutInt)
-        return render_template("index.html", version=version, total=total, payoutPercent=payoutInt)
-    except (ValueError, TypeError, NameError):
-        logging.error("Error, lol, figure it out")
-        print("0001 - Could not convert string to int")
-        return render_template("index.html", version=version, total="Error")
+    cookie = request.cookies.get('logonID')
+    hasCookie = checkCookie(cookie)
+    payoutInt = 50 ## TODO payout percent on the website defaults to 50, regardless of that value
+    if hasCookie:
+        try:
+            goldValue = int(request.form.get('gold-amount'))
+            ironValue = int(request.form.get('iron-amount'))
+            coalValue = int(request.form.get('coal-amount'))
+            copperValue = int(request.form.get('copper-amount'))
+            payoutInt = int(request.form.get('payoutPercent'))
+            total = calculate(goldValue, ironValue, coalValue, copperValue, payoutInt)
+            return render_template("index.html", version=version, total=total, payoutPercent=payoutInt)
+        except (ValueError, TypeError, NameError):
+            return render_template("index.html", version=version, total="Error", payoutPercent=payoutInt)
+    else: return redirect('/')
 
 
 @app.route('/error', methods=['GET', 'POST'])

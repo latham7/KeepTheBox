@@ -7,8 +7,6 @@ cur = con.cursor()
 def checkAuth(username, password):
     cur.execute(f"SELECT * FROM Users WHERE username='{username}' AND password='{password}'")
     stored = cur.fetchall()
-    print(stored)
-    print(f"[('{ username }', '{ password }')]")
     try :
         if stored[0][0] == username:
             if stored[0][1] == password:
@@ -16,7 +14,8 @@ def checkAuth(username, password):
         else:
             return False
     except:
-        print("Error - auth.py - CheckAuth function")
+        print("INFO - Incorrect Username or Password")
+        print(f"---- {username} - {password}")
 #    try:
 #        con.execute(f"SELECT * FROM Users WHERE username='{ username }' AND password='{password}'")
 #        return True
@@ -25,10 +24,14 @@ def checkAuth(username, password):
 
 
 def checkCookie(cookie):
-    try:
-        con.execute(f"SELECT * FROM Users WHERE username='{cookie}''")
-        return True
+    cur.execute(f"SELECT * FROM Users WHERE username='{cookie}'")
+    stored = cur.fetchall()
+    print(stored)
+    try: 
+        if stored[0][0] == cookie:
+            return True
+        else: return True
     except:
+        print("Error - auth.py - checkCookie")
         return False
-
 

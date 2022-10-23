@@ -1,13 +1,5 @@
-# 
-#  __     __              _        _     _      
-#  \ \   / /__  __ _  ___| |_ __ _| |__ | | ___ 
-#   \ \ / / _ \/ _` |/ _ \ __/ _` | '_ \| |/ _ \
-#    \ V /  __/ (_| |  __/ || (_| | |_) | |  __/
-#     \_/ \___|\__, |\___|\__\__,_|_.__/|_|\___|
-#              |___/                            
-#
 # Vegetable Development - https://github.com/Vegetable8
-# This is to setup parts of KeepTheBox Server. 
+# This is to setup parts of KeepTheBox Assistant Server. 
 
 # Imports
 import sqlite3
