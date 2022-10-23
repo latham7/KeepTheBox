@@ -26,7 +26,6 @@ def checkAuth(username, password):
 def checkCookie(cookie):
     cur.execute(f"SELECT * FROM Users WHERE username='{cookie}'")
     stored = cur.fetchall()
-    print(stored)
     try: 
         if stored[0][0] == cookie:
             return True

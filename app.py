@@ -1,3 +1,5 @@
+
+## Imports
 from django.shortcuts import render
 from flask import Flask, make_response, render_template, request, redirect, url_for
 from calculate import calculate
@@ -6,13 +8,9 @@ from auth import checkAuth, checkCookie
 import logging
 import sqlite3
 
-
-
-
 app = Flask(__name__, template_folder='web/templates', static_folder='web/static')
-version = "1.2"
+version = "2.1"
 debug_mode = False  # TODO Implement debugging mode
-initDb()
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
@@ -58,8 +56,12 @@ def calculateRoute():
             ironValue = int(request.form.get('iron-amount'))
             coalValue = int(request.form.get('coal-amount'))
             copperValue = int(request.form.get('copper-amount'))
+            gunpowderValue = int(request.form.get('gunpowder-amount'))
+            netherwartValue = int(request.form.get('netherwart-amount'))
+            dirtValue = int(request.form.get('dirt-amount'))
+            deepslateValue = int(request.form.get('deepslate-amount'))            
             payoutInt = int(request.form.get('payoutPercent'))
-            total = calculate(goldValue, ironValue, coalValue, copperValue, payoutInt)
+            total = calculate(goldValue, ironValue, coalValue, copperValue, payoutInt, gunpowderValue, netherwartValue, dirtValue, deepslateValue)
             return render_template("index.html", version=version, total=total, payoutPercent=payoutInt)
         except (ValueError, TypeError, NameError):
             return render_template("index.html", version=version, total="Error", payoutPercent=payoutInt)
