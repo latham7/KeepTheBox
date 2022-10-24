@@ -3,7 +3,7 @@
 from venv import create
 from flask import Flask, make_response, render_template, request, redirect, url_for
 from calculate import calculate
-from database import createUser, initDb
+from database import createUser
 from auth import checkAuth, checkCookie
 import logging
 import sqlite3
@@ -78,6 +78,8 @@ def admin():
 ##### ADMIN MATERIALS ########
 @app.route('/admin/materials')
 def adminMaterials():
+    ## TODO Create DB Table with stuff
+    ## material ID , materialName, materialPrice, materialImgPath ????
     return render_template('adminMaterials.html', version=version)
 
 ######## ADMIN USERS ########
