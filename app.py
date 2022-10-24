@@ -70,6 +70,11 @@ def calculateRoute():
 
 ######## ADMIN APP ROUTES #########
 
+
+@app.route('/admin')
+def admin():
+    return redirect('/admin/users')
+
 ##### ADMIN MATERIALS ########
 @app.route('/admin/materials')
 def adminMaterials():
@@ -95,30 +100,46 @@ def adminUsers():
 
 @app.route('/admin/users/create', methods=['POST'])
 def adminUsersCreate():
-    username = request.form.get('username')
-    password = request.form.get('password')
-    createUser(username, password)
-    rtrnMsg = "User created succesfully."
-    return redirect(url_for('.adminUsers', version=version, rtrnMsg="rtrnMsg")) # TODO This does not return to the website
+    cookie = request.cookies.get('logonID')
+    hasCookie = checkCookie(cookie)
+    if hasCookie:      
+        username = request.form.get('username')
+        password = request.form.get('password')
+        createUser(username, password)
+        rtrnMsg = "User created succesfully."
+        return redirect(url_for('.adminUsers', version=version, rtrnMsg="rtrnMsg")) # TODO This does not return to the website
+    else: redirect('/')
 
 @app.route('/admin/users/<username>/delete')
 def adminUsersDelete(username):
-    con = sqlite3.connect('database.db', check_same_thread=False)
-    cur = con.cursor()
-    cur.execute(f"DELETE FROM Users WHERE username='{username}'")
-    con.commit()
-    return redirect('/admin/users')
+    cookie = request.cookies.get('logonID')
+    hasCookie = checkCookie(cookie)
+    if hasCookie:  
+        con = sqlite3.connect('database.db', check_same_thread=False)
+        cur = con.cursor()
+        cur.execute(f"DELETE FROM Users WHERE username='{username}'")
+        con.commit()
+        con.close()
+        return redirect('/admin/users')
+    else: redirect('/')
 
-@app.route('/admin/users/<username>/reset', method=['GET', 'POST'])
+@app.route('/admin/users/<username>/reset', methods=['GET', 'POST'])
 def adminUsersReset(username):
-    if Flask.request.method == 'POST':
-        return
-    con = sqlite3.connect('database.db', check_same_thread=False)
-    cur = con.cursor()
-    cur.execute(f"UPDATE Users SET password = 'peepee' WHERE username='rahhhhh';'")
-    con.commit()
-    return redirect('/admin/users')
-
+    cookie = request.cookies.get('logonID')
+    hasCookie = checkCookie(cookie)
+    if hasCookie: 
+        if  request.method == 'POST':
+            newPassword = request.form.get('newPassword')
+            print(newPassword)
+            con = sqlite3.connect('database.db', check_same_thread=False)
+            cur = con.cursor()
+            cur.executescript(f"UPDATE Users SET password = '{newPassword}' WHERE username='{username}'")
+            con.commit()
+            con.close()
+            return redirect('/admin/users')
+        else: 
+            return render_template('resetPassword.html', version=version, username=username)
+    else: return redirect('/')
 
 @app.route('/error', methods=['GET', 'POST'])
 def error():
