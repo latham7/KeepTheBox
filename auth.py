@@ -20,7 +20,7 @@ def checkAuth(username, password):
 #        con.execute(f"SELECT * FROM Users WHERE username='{ username }' AND password='{password}'")
 #        return True
 #    except:
-#        return False
+#        return False allUsers[0][0]
 
 
 def checkCookie(cookie):

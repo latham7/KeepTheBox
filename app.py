@@ -1,6 +1,6 @@
 
 ## Imports
-from django.shortcuts import render
+from venv import create
 from flask import Flask, make_response, render_template, request, redirect, url_for
 from calculate import calculate
 from database import createUser, initDb
@@ -9,15 +9,15 @@ import logging
 import sqlite3
 
 app = Flask(__name__, template_folder='web/templates', static_folder='web/static')
-version = "2.1"
+version = "2.2 Beta"
 debug_mode = False  # TODO Implement debugging mode
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
-
+con = sqlite3.connect('database.db', check_same_thread=False)
+cur = con.cursor()
 ####### INDEX APP ROUTE #################
 @app.route("/", methods=['GET', 'POST'])  
 def index():
-    createUser("test", "123")
     hasCookie = checkCookie(request.cookies.get('logonID'))
     if hasCookie:
         return redirect('/calculate')
@@ -61,11 +61,63 @@ def calculateRoute():
             dirtValue = int(request.form.get('dirt-amount'))
             deepslateValue = int(request.form.get('deepslate-amount'))            
             payoutInt = int(request.form.get('payoutPercent'))
+
             total = calculate(goldValue, ironValue, coalValue, copperValue, payoutInt, gunpowderValue, netherwartValue, dirtValue, deepslateValue)
             return render_template("index.html", version=version, total=total, payoutPercent=payoutInt)
         except (ValueError, TypeError, NameError):
             return render_template("index.html", version=version, total="Error", payoutPercent=payoutInt)
     else: return redirect('/')
+
+######## ADMIN APP ROUTES #########
+
+##### ADMIN MATERIALS ########
+@app.route('/admin/materials')
+def adminMaterials():
+    return render_template('adminMaterials.html', version=version)
+
+######## ADMIN USERS ########
+@app.route('/admin/users')
+def adminUsers():
+    cookie = request.cookies.get('logonID')
+    hasCookie = checkCookie(cookie)
+
+    if hasCookie:    
+        con = sqlite3.connect('database.db', check_same_thread=False)
+        cur = con.cursor()
+        cur.execute("SELECT username FROM Users")
+        allUsers = cur.fetchall()
+        cur.close()
+        return render_template('adminUsers.html', version=version, allUsers=allUsers, len=len(allUsers))
+    else:
+        return redirect('/')
+
+
+
+@app.route('/admin/users/create', methods=['POST'])
+def adminUsersCreate():
+    username = request.form.get('username')
+    password = request.form.get('password')
+    createUser(username, password)
+    rtrnMsg = "User created succesfully."
+    return redirect(url_for('.adminUsers', version=version, rtrnMsg="rtrnMsg")) # TODO This does not return to the website
+
+@app.route('/admin/users/<username>/delete')
+def adminUsersDelete(username):
+    con = sqlite3.connect('database.db', check_same_thread=False)
+    cur = con.cursor()
+    cur.execute(f"DELETE FROM Users WHERE username='{username}'")
+    con.commit()
+    return redirect('/admin/users')
+
+@app.route('/admin/users/<username>/reset', method=['GET', 'POST'])
+def adminUsersReset(username):
+    if Flask.request.method == 'POST':
+        return
+    con = sqlite3.connect('database.db', check_same_thread=False)
+    cur = con.cursor()
+    cur.execute(f"UPDATE Users SET password = 'peepee' WHERE username='rahhhhh';'")
+    con.commit()
+    return redirect('/admin/users')
 
 
 @app.route('/error', methods=['GET', 'POST'])

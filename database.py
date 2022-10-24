@@ -12,5 +12,7 @@ def initDb():
 
 def createUser(username,password):
     con.execute(f"INSERT INTO Users(username,password) VALUES ('{ username }','{ password }');")
+    con.commit()
+    return
 
 
