@@ -1,68 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<title>KeepTheBox</title>
-
-		<link href="{{ url_for('static',filename='css/bootstrap.css') }}"
-			rel="stylesheet">
-		<link href="{{ url_for('static',filename='css/style.css') }}"
-			rel="stylesheet">
-
-	</head>
-	<body>
-
-		<script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
-
-        <section class="h-100 gradient-form bg-primary">
-          <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-              <div class="col-xl-10">
-                <div class="card rounded-3 text-black">
-                  <div class="row g-0">
-                    <div class="col-lg-6">
-                      <div class="card-body p-md-5 mx-md-4">
-                        <div class="text-center">
-                          <img src="https://i.pinimg.com/736x/7c/bf/43/7cbf43e86203d1e25d725d22021cbbde.jpg"
-                               style="width: 185px;" alt="logo">
-                          <h4 class="mt-1 mb-5 pb-1">KeepTheBox Contribution Tool</h4>
-                        </div>
-
-                        <form id="login" action="/login" method="post">
-                          <p>Please login to your account</p>
-
-                          <div class="form-outline mb-4">
-                            <input type="text" name="username" id="form2Example11" class="form-control"
-                                   placeholder="Username" />
-                            <label class="form-label" for="form2Example11">Username</label>
-                          </div>
-
-                          <div class="form-outline mb-4">
-                            <input type="password" name="password" id="form2Example22" class="form-control" placeholder="Password"/>
-                            <label class="form-label" for="form2Example22">Password</label>
-                          </div>
-
-                          <div class="text-center pt-1 mb-5 pb-1">
-                            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
-                              in</button>
-                            <a class="text-muted">{{ error }}</a>
-                          </div>
-                        </form>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <script src="{{ url_for('static',filename='js/bootstrap.bundle.js') }}"></script>
-		<script src="{{ url_for('static',filename='js/scripts.js') }}"></script>
-	</body>
-</html>
-
 <!-- THING NEEDED FOR /STATIC IMPORTS {{ url_for('static',filename='js/jquery.min.js') }} -->
+<!-- THIS IS NOT MY CODE. THIS IS BOOTSTRAP'S EXAMPLE'S CODE -->
+<!--URL HERE: https://getbootstrap.com/docs/4.0/examples/sign-in/ -->
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,
+            shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
+
+        <title>Login | KeepTheBox</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="{{ url_for('static',filename='css/bootstrap.css') }}"
+            rel="stylesheet">
+        <link href="{{ url_for('static',filename='css/style.css') }}"
+            rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="{{ url_for('static',filename='css/signin.css') }}"
+            rel="stylesheet">
+
+    </head>
+
+    <body class="text-center">
+        <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+        <form id="login" action="/login" method="post" class="form-signin">
+            <img class="mb-4"
+                src="{{ url_for('static',filename='img/pumpkin.png') }}"
+                alt="" width="250" height="250">
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <label for="inputEmail" class="sr-only">Username</label>
+            <input type="text" name="username" id="inputEmail" class="form-control"
+                placeholder="Username" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control"
+                placeholder="Password" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+                in</button>
+            <p class="mt-5 mb-3 text-muted">Vegetable#0001</p>
+        </form>
+        <script src="{{ url_for('static',filename='js/bootstrap.bundle.js') }}"></script>
+        <script src="{{ url_for('static',filename='js/scripts.js') }}"></script>
+    </body>
+</html>

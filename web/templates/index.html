@@ -16,169 +16,172 @@
 	<body>
 
 		<div class="container-fluid">
-			<div class="row bg-faded">
-				<div class="col-md-12">
-					<nav class="navbar navbar-light bg-light">
-						<a class="navbar-brand" href="#">KeepTheBox Contribution Tool - v{{ version }}</a>
-					</nav>
-					<div class="row bg-primary p-3 rounded gx-1 pt-5 pb-5">
-						<div class="row">
-							<div class="col-md-9">
-								<h3 class="display-5">
-									KeepTheBox Contribution Pricing Calculator
-								</h3>
-								<p>
-									Trying to keep track of how much to pay Vege can be tough, luckily, this
-									website will solve that problem.
-								</p>
-							</div>
-							<div class="col-md-3">
-								<img src="{{ url_for('static',filename='img/Shulker_Box.webp') }}"
-										class="img-fluid mb-2 mx-auto d-none d-md-block" style="height: auto; width: 70%">
-							</div>
-						</div>
+
+
+			<nav class="navbar navbar-light bg-light">
+				<a class="navbar-brand" href="#">KeepTheBox Contribution Tool - v{{ version
+					}}</a>
+			</nav>
+			<div class="row bg-primary p-3 rounded gx-1 pt-5 pb-5">
+				<div class="row">
+					<div class="col-md-9">
+						<h3 class="display-5">
+							KeepTheBox Contribution Pricing Calculator
+						</h3>
+						<p>
+							Trying to keep track of how much to pay Vege can be tough, luckily, this
+							website will solve that problem.
+						</p>
 					</div>
-					<form id="calculate" action="/calculate" method="post">
-						<div class="row">
-							<div class="col-md p-2 text-center rounded border">
-								<h4 style="margin-bottom:0;">Raw Gold Ore</h4>
-								<p class="h6">$3500</p>
-								<div class="text-center">
-									<img src="{{ url_for('static',filename='img/gold.png') }}"
-										class="img-fluid mb-2" style="width: 30%; height: 30%;">
-								</div>
-								<div class="input-group">
-									<span class="input-group-text bg-primary d-flex"><i>Shulkers</i></span>
-									<input id="email" type="number" class="form-control"
-										name="gold-amount"
-										value="0">
-								</div>
-							</div>
-							<div class="col-md p-2 text-center rounded border bg-light">
-								<h4 style="margin-bottom:0;">Raw Iron Ore</h4>
-								<p class="h6">$3500</p>
-								<div class="text-center">
-									<img src="{{ url_for('static',filename='img/iron.webp') }}"
-										class="img-fluid mb-2" style="width: 30%; height: 30%;">
-								</div>
-								<div class="input-group p-1">
-									<span class="input-group-text bg-primary"><i>Shulkers</i></span>
-									<input id="email" type="number" class="form-control"
-										name="iron-amount"
-										value="0">
-								</div>
-							</div>
-							<div class="col-md p-2 text-center rounded border bg-light">
-								<h4 style="margin-bottom:0;">Coal Ore</h4>
-								<p class="h6">$3500</p>
-								<div class="text-center">
-									<img src="{{ url_for('static',filename='img/coal.webp') }}"
-										class="img-fluid mb-2" style="width: 30%; height: 30%;">
-								</div>
-								<div class="input-group">
-									<span class="input-group-text bg-primary"><i>Shulkers</i></span>
-									<input id="email" type="number" class="form-control"
-										name="coal-amount"
-										value="0">
-								</div>
-							</div>
-							<div class="col-md p-2 text-center rounded border bg-light">
-								<h4 style="margin-bottom:0;">Raw Copper Ore</h4>
-								<p class="h6">$3500</p>
-								<div class="text-center">
-									<img src="{{ url_for('static',filename='img/copper.webp') }}"
-										class="img-fluid mb-2" style="width: 30%; height: 30%;">
-								</div>
-								<div class="input-group">
-									<span class="input-group-text bg-primary"><i>Shulkers</i></span>
-									<input id="email" type="number" class="form-control"
-										name="copper-amount"
-										value="0">
-								</div>
-							</div>
-						</div>
-						<div class="row pt-3">
-							<div class="col-md text-center rounded border bg-light">
-								<h4 style="margin-bottom:0;">Gunpowder</h4>
-								<p class="h6">$3500</p>
-								<div class="text-center">
-									<img src="{{ url_for('static',filename='img/gunpowder.webp') }}"
-										class="img-fluid mb-2" style="width: 30%; height: 30%;">
-								</div>
-								<div class="input-group">
-									<span class="input-group-text bg-primary"><i>Shulkers</i></span>
-									<input id="email" type="number" class="form-control"
-										name="gunpowder-amount"
-										value="0">
-								</div>
-							</div>
-							<div class="col-md text-center rounded border bg-light">
-								<h4 style="margin-bottom:0;">Netherwart</h4>
-								<p class="h6">$2000</p>
-								<div class="text-center">
-									<img src="{{ url_for('static',filename='img/netherwart.webp') }}"
-										class="img-fluid mb-2" style="width: 30%; height: 30%;">
-								</div>
-								<div class="input-group">
-									<span class="input-group-text bg-primary"><i>Shulkers</i></span>
-									<input id="email" type="number" class="form-control"
-										name="netherwart-amount"
-										value="0">
-								</div>
-							</div>
-							<div class="col-md text-center rounded border bg-light pb-2">
-								<h4 style="margin-bottom:0;">Dirt</h4>
-								<p class="h6">$3500</p>
-								<div class="text-center">
-									<img src="{{ url_for('static',filename='img/dirt.webp') }}"
-										class="img-fluid mb-2" style="width: 30%; height: 30%;">
-								</div>
-								<div class="input-group">
-									<span class="input-group-text bg-primary"><i>Shulkers</i></span>
-									<input id="email" type="number" class="form-control"
-										name="dirt-amount"
-										value="0">
-								</div>
-							</div>
-							<div class="col-md text-center rounded border bg-light">
-								<h4 style="margin-bottom:0;">Cobbled Deepslate</h4>
-								<p class="h6">$1500</p>
-								<div class="text-center">
-									<img src="{{ url_for('static',filename='img/Cobbled_Deepslate.webp') }}"
-										class="img-fluid mb-2" style="width: 30%; height: 30%;">
-								</div>
-								<div class="input-group">
-									<span class="input-group-text bg-primary"><i>Shulkers</i></span>
-									<input id="email" type="number" class="form-control"
-										name="deepslate-amount"
-										value="0">
-								</div>
-							</div>
-						</div>
-						<div class="row pt-4">
-							<div class="col-sm-4 text-center rounded">
-								<button type="submit" class="btn btn-success">Submit</button>
-								<br><br>
-								<span class="d-inline-flex">
-									<input class="form-control text-center" type="text"
-									placeholder="Answer: {{ total }}" readonly>
-								</span>
-							</div>
-							<div class="col-sm-8 justify-content-center rounded">
-								<h4>Options</h4>
-								<label for="matSlider" class="form-label font-weight-bold text-center">Payout
-									Percentage </label>
-								<span class="d-inline-flex">
-								<input type="range" name="payoutPercent" class="form-range " min="0"
-									max="100" value="{{ payoutInt }}" id="matSlider" oninput="num.value=
-									this.value">
-								</span>
-								<output id="num">50</output>
-							</div>
-						</div>
-					</form>
+					<div class="col-md-3">
+						<img src="{{ url_for('static',filename='img/Shulker_Box.webp') }}"
+							class="img-fluid mb-2 mx-auto d-none d-md-block" style="height: auto;
+							width: 70%">
+					</div>
 				</div>
 			</div>
+			<div class="bad-html">
+			<form id="calculate" action="/calculate" method="post">
+				<div class="row">
+					<div class="col-md p-2 text-center rounded border">
+						<h4 style="margin-bottom:0;">Raw Gold Ore</h4>
+						<p class="h6">$3500</p>
+						<div class="text-center">
+							<img src="{{ url_for('static',filename='img/gold.png') }}"
+								class="img-fluid mb-2" style="width: 30%; height: 30%;">
+						</div>
+						<div class="input-group">
+							<span class="input-group-text bg-primary d-flex"><i>Shulkers</i></span>
+							<input id="email" type="number" class="form-control"
+								name="gold-amount"
+								value="0">
+						</div>
+					</div>
+					<div class="col-md p-2 text-center rounded border bg-light">
+						<h4 style="margin-bottom:0;">Raw Iron Ore</h4>
+						<p class="h6">$3500</p>
+						<div class="text-center">
+							<img src="{{ url_for('static',filename='img/iron.webp') }}"
+								class="img-fluid mb-2" style="width: 30%; height: 30%;">
+						</div>
+						<div class="input-group p-1">
+							<span class="input-group-text bg-primary"><i>Shulkers</i></span>
+							<input id="email" type="number" class="form-control"
+								name="iron-amount"
+								value="0">
+						</div>
+					</div>
+					<div class="col-md p-2 text-center rounded border bg-light">
+						<h4 style="margin-bottom:0;">Coal Ore</h4>
+						<p class="h6">$3500</p>
+						<div class="text-center">
+							<img src="{{ url_for('static',filename='img/coal.webp') }}"
+								class="img-fluid mb-2" style="width: 30%; height: 30%;">
+						</div>
+						<div class="input-group">
+							<span class="input-group-text bg-primary"><i>Shulkers</i></span>
+							<input id="email" type="number" class="form-control"
+								name="coal-amount"
+								value="0">
+						</div>
+					</div>
+					<div class="col-md p-2 text-center rounded border bg-light">
+						<h4 style="margin-bottom:0;">Raw Copper Ore</h4>
+						<p class="h6">$3500</p>
+						<div class="text-center">
+							<img src="{{ url_for('static',filename='img/copper.webp') }}"
+								class="img-fluid mb-2" style="width: 30%; height: 30%;">
+						</div>
+						<div class="input-group">
+							<span class="input-group-text bg-primary"><i>Shulkers</i></span>
+							<input id="email" type="number" class="form-control"
+								name="copper-amount"
+								value="0">
+						</div>
+					</div>
+				</div>
+				<div class="row pt-3">
+					<div class="col-md text-center rounded border bg-light">
+						<h4 style="margin-bottom:0;">Gunpowder</h4>
+						<p class="h6">$3500</p>
+						<div class="text-center">
+							<img src="{{ url_for('static',filename='img/gunpowder.webp') }}"
+								class="img-fluid mb-2" style="width: 30%; height: 30%;">
+						</div>
+						<div class="input-group">
+							<span class="input-group-text bg-primary"><i>Shulkers</i></span>
+							<input id="email" type="number" class="form-control"
+								name="gunpowder-amount"
+								value="0">
+						</div>
+					</div>
+					<div class="col-md text-center rounded border bg-light">
+						<h4 style="margin-bottom:0;">Netherwart</h4>
+						<p class="h6">$2000</p>
+						<div class="text-center">
+							<img src="{{ url_for('static',filename='img/netherwart.webp') }}"
+								class="img-fluid mb-2" style="width: 30%; height: 30%;">
+						</div>
+						<div class="input-group">
+							<span class="input-group-text bg-primary"><i>Shulkers</i></span>
+							<input id="email" type="number" class="form-control"
+								name="netherwart-amount"
+								value="0">
+						</div>
+					</div>
+					<div class="col-md text-center rounded border bg-light pb-2">
+						<h4 style="margin-bottom:0;">Dirt</h4>
+						<p class="h6">$3500</p>
+						<div class="text-center">
+							<img src="{{ url_for('static',filename='img/dirt.webp') }}"
+								class="img-fluid mb-2" style="width: 30%; height: 30%;">
+						</div>
+						<div class="input-group">
+							<span class="input-group-text bg-primary"><i>Shulkers</i></span>
+							<input id="email" type="number" class="form-control"
+								name="dirt-amount"
+								value="0">
+						</div>
+					</div>
+					<div class="col-md text-center rounded border bg-light">
+						<h4 style="margin-bottom:0;">Cobbled Deepslate</h4>
+						<p class="h6">$1500</p>
+						<div class="text-center">
+							<img src="{{ url_for('static',filename='img/Cobbled_Deepslate.webp') }}"
+								class="img-fluid mb-2" style="width: 30%; height: 30%;">
+						</div>
+						<div class="input-group">
+							<span class="input-group-text bg-primary"><i>Shulkers</i></span>
+							<input id="email" type="number" class="form-control"
+								name="deepslate-amount"
+								value="0">
+						</div>
+					</div>
+				</div>
+				<div class="row pt-4">
+					<div class="col-sm-4 text-center rounded">
+						<button type="submit" class="btn btn-success">Submit</button>
+						<br><br>
+						<span class="d-inline-flex">
+							<input class="form-control text-center" type="text"
+								placeholder="Answer: {{ total }}" readonly>
+						</span>
+					</div>
+					<div class="col-sm-8 justify-content-center rounded">
+						<h4>Options</h4>
+						<label for="matSlider" class="form-label font-weight-bold text-center">Payout
+							Percentage </label>
+						<span class="d-inline-flex">
+							<input type="range" name="payoutPercent" class="form-range " min="0"
+								max="100" value="{{ payoutInt }}" id="matSlider" oninput="num.value=
+								this.value">
+						</span>
+						<output id="num">50</output>
+					</div>
+				</div>
+			</form>
+		</div>
+
 		</div>
 
 		<script src="{{ url_for('static',filename='js/bootstrap.js') }}"></script>
